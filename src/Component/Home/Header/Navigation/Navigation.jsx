@@ -24,7 +24,9 @@ const Navigation = () => {
           </div>
           <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <Link to="/home">Home</Link>
+              <Link to="/home" className="text-xl">
+                Home
+              </Link>
             </li>
             {/* {loggedInUser && (
               <li>
@@ -33,7 +35,9 @@ const Navigation = () => {
             )} */}
 
             <li>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" className="text-xl">
+                Dashboard
+              </Link>
             </li>
           </ul>
         </div>
@@ -49,10 +53,14 @@ const Navigation = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/home">Home</Link>
+            <Link to="/home" className="text-xl">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard" className="text-xl">
+              Dashboard
+            </Link>
           </li>
         </ul>
       </div>

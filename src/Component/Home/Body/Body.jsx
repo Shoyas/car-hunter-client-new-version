@@ -185,8 +185,10 @@ const Body = () => {
   const renderCarInformation = () => {
     if (status === "loading") {
       return (
-        <div className="spinner-position">
-          <img src={spinner} alt="" />
+        <div className="flex justify-center">
+          <div className="spinner-position">
+            <img src={spinner} alt="" />
+          </div>
         </div>
       );
     } else if (error === "failed") {
@@ -205,8 +207,11 @@ const Body = () => {
           }
         })
         .map((car) => (
-          <div key={car._id} className="grid grid-cols-4 gap-10 mt-10">
-            <div className="card card-compact w-96 bg-base-100 shadow-xl">
+          <div
+            key={car._id}
+            className="grid gap-x-8 gap-y-4  xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1"
+          >
+            <div className="card card-compact xl:w-80 lg:w-64 md:w-80 sm:w-96 bg-base-100 shadow-xl">
               <figure>
                 {car.image ? (
                   <img
