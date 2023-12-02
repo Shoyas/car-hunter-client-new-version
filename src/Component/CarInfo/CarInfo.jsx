@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteCar,
@@ -9,8 +9,11 @@ import { Link, useParams } from "react-router-dom";
 import "./CarInfo.css";
 import Navigation from "../Home/Header/Navigation/Navigation";
 import spinner from "../../assets/image/Spinner-1s-200px.gif";
+import { AuthContext } from "../../Providers/AuthProviders";
+import FooterContainer from "../Footer/FooterContainer";
 
 const CarInfo = () => {
+  const [loggedInUser] = useContext(AuthContext);
   const [isOpened, setIsOpened] = useState(false);
   const [updateCarInfo, setUpdateCarInfo] = useState({
     name: "",
@@ -31,7 +34,7 @@ const CarInfo = () => {
   if (status === "loading" || singleCarInfo.length === 0) {
     return (
       <div className="flex justify-center">
-        <div className="spinner-position">
+        <div className="spinner-position-carInfo">
           <img src={spinner} alt="" />
         </div>
       </div>
@@ -80,18 +83,22 @@ const CarInfo = () => {
             <Link to="/home">
               <button className="btn btn-primary">OK</button>
             </Link>
-            <button
-              className="btn btn-primary ml-5 mr-5"
-              onClick={() => deleteCarBrand(`${singleCarInfo?._id}`)}
-            >
-              <Link to="/home">Delete</Link>
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => toggle(`${singleCarInfo?._id}`)}
-            >
-              Update
-            </button>
+            {loggedInUser && (
+              <>
+                <button
+                  className="btn btn-primary ml-5 mr-5"
+                  onClick={() => deleteCarBrand(`${singleCarInfo?._id}`)}
+                >
+                  <Link to="/home">Delete</Link>
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => toggle(`${singleCarInfo?._id}`)}
+                >
+                  Update
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -104,7 +111,7 @@ const CarInfo = () => {
           <form>
             <input
               type="text"
-              className="custom-textarea"
+              className="input input-bordered w-full max-w-xs"
               placeholder="Enter Brand Name"
               defaultValue={singleCarInfo?.name}
               name="name"
@@ -113,7 +120,7 @@ const CarInfo = () => {
             <br />
             <br />
             <textarea
-              className="custom-textarea"
+              className="textarea textarea-bordered w-full max-w-xs"
               id="exampleFormControlTextarea1"
               rows="10"
               placeholder="Description about brand"
@@ -129,6 +136,7 @@ const CarInfo = () => {
           </form>
         </div>
       )}
+      <FooterContainer />
     </div>
   );
 };

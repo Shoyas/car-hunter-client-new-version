@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-ghost{
+    color: white !important;
+    background-color: #4A00FF !important;
+}

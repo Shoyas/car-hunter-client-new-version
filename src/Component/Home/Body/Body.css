@@ -3,23 +3,29 @@
     height: 180px;
     
 }
-.spinner-position img{
-    margin-left: 300%;
-}
-
 .card-area {
     margin: 0px 10px;
+}
+
+.spinner-position img{
+    margin-left: 300%;
 }
 
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .card-area {
-        margin-left: 10px;
-        margin-right: 10px;
+    .spinner-position img{
+        margin-left: 200%;
     }
     
   }
-  @media (max-width: 320px) {
-    
+  @media (max-width: 768px) {
+    .spinner-position img{
+        margin-left: 120%;
+    }
+  }
+  @media (max-width: 425px) {
+    .spinner-position img{
+        margin-left: 0%;
+    }
   }

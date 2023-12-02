@@ -1,44 +1,60 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Navigation from "../Home/Header/Navigation/Navigation";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProviders";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import app from "./firebase.config";
+import logo from "./../../assets/image/New/carts/partner-2.png";
+
 const Login = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(AuthContext);
+
+  const history = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const auth = getAuth(app);
+  console.log("User: ", loggedInUser);
+  const provider = new GoogleAuthProvider();
+  const ClickForGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const { displayName, email } = result.user;
+        const signedInUser = { name: displayName, email };
+        setLoggedInUser(signedInUser);
+
+        history(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col ">
-        <div className="text-center ">
-          <h1 className="text-5xl font-bold mb-5">Car Hunter Login</h1>
-        </div>
-        <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered"
-                required
-              />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
-            </div>
-          </form>
-        </div>
+    <div className="md:container md:mx-auto login-area">
+      <Navigation />
+      <div className="flex justify-center items-center mt-20">
+        <img className="logo-img" src={logo} alt="Car Hunter" />
+      </div>
+
+      <div className="login-popup text-center mt-5">
+        <br />
+        <br />
+        <br />
+        <h5 className="text-xl">Login With</h5>
+
+        <button onClick={ClickForGoogleSignIn} className="btn btn-primary mt-5">
+          Continue with Google
+        </button>
+
+        <br />
+        <br />
+        <h6>
+          Don't have an account ?{" "}
+          <Link to="/login" style={{ color: "blue" }}>
+            Create an account
+          </Link>{" "}
+        </h6>
       </div>
     </div>
   );
