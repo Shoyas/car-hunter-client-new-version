@@ -31,8 +31,7 @@
 
 - NodeJS (express)
 - MongoDB
-- Firebase
-- Netlify
+- Render
 - Github
 
 #### Live site: https://car-hunter-new-version.web.app/
