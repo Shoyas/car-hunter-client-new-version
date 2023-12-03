@@ -21,8 +21,7 @@ const AddCar = () => {
     });
   };
 
-  const handleAddCar = (e) => {
-    e.preventDefault();
+  const handleAddCar = () => {
     const formData = new FormData();
     formData.append("file", carData.file);
     formData.append("name", carData.name);

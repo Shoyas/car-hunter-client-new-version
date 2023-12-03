@@ -11,6 +11,8 @@ import Navigation from "../Home/Header/Navigation/Navigation";
 import spinner from "../../assets/image/Spinner-1s-200px.gif";
 import { AuthContext } from "../../Providers/AuthProviders";
 import FooterContainer from "../Footer/FooterContainer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CarInfo = () => {
   const [loggedInUser] = useContext(AuthContext);
@@ -48,7 +50,6 @@ const CarInfo = () => {
   };
 
   const handleUpdateValue = (updateValue) => {
-    updateValue.preventDefault();
     const newUpdate = { ...updateCarInfo };
     newUpdate[updateValue.target.name] = updateValue.target.value;
     setUpdateCarInfo(newUpdate);
@@ -67,6 +68,7 @@ const CarInfo = () => {
   return (
     <div className="md:container md:mx-auto">
       <Navigation />
+      <ToastContainer />
       <div className="hero min-h-full bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           {singleCarInfo.image ? (

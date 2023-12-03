@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import Navigation from "../Home/Header/Navigation/Navigation";
+import { useContext } from "react";
+import { AuthContext } from "./../../Providers/AuthProviders";
 
 const Dashboard = () => {
+  const [loggedInUser] = useContext(AuthContext);
   return (
     <div>
       <div className="md:container md:mx-auto">
@@ -12,7 +15,7 @@ const Dashboard = () => {
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col justify-start mt-5 ml-5">
             <h1 className="text-3xl">
-              Welcome back <br /> Admin Name
+              Welcome back <br /> {loggedInUser.name}
             </h1>
             <label
               htmlFor="my-drawer-2"
